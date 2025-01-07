@@ -4,8 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// Import routers
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var lockRouter = require('./routes/lock');  // Import the lock route
 
 var app = express();
 
@@ -19,8 +21,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Use the imported routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/lock', lockRouter);  // Add the lock route here
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
